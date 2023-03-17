@@ -1,0 +1,21 @@
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 0.0 # this disables Zipkin publishing, we don't want Zipkin
+    propagation:
+      type: B3 # we use B3, default is W3C
+
+spring:
+  data:
+    redis:
+      host: mamoru-redis-new-dev-001.fele44.0001.ape1.cache.amazonaws.com
+      port: 6379
+  kafka:
+    bootstrap-servers: 172.23.3.214:32094
+    consumer:
+      group-id: quick-demo
+    producer:
+      acks: -1
+
+logging.pattern.level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
